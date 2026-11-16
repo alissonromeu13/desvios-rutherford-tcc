@@ -46,7 +46,7 @@ Os PDFs saem em `figuras/<pasta>/<nome>.pdf`. Se o `pdftoppm` (Poppler) estiver 
 
 | Script | O que imprime |
 |---|---|
-| `numeros_do_texto/n10_fator_forma_carga_bieler.py` | $|F(q)|^2$ da esfera homogênea nos ângulos efetivos dos diafragmas de Bieler, comparado às razões medidas (Seção 4.1.2) |
+| `numeros_do_texto/n10_fator_forma_carga_bieler.py` | $\lvert F(q)\rvert^2$ da esfera homogênea nos ângulos efetivos dos diafragmas de Bieler, comparado às razões medidas (Seção 4.1.2) |
 | `numeros_do_texto/n12_escolha_K0R.py` | Varredura de $K_0R$ que levou à ressonância $l = 3$ estreita da Figura 12 |
 | `numeros_do_texto/n13_escolha_Delta.py` | Oscilação de σ_reação com o corte abrupto em *l* e com a borda suave Δ = 0,5 da Figura 13(b) |
 | `numeros_do_texto/n17_alfa_aluminio.py` | $\sigma_{\text{reação}}$ em 24,7 MeV para os três potenciais do Al (McFadden e Satchler, Tab. 3, p. 187); $\chi^2$ dos seis pontos de Bieler; funções de excitação em 90° e 135° comparadas a Rutherford e Chadwick (1925) e a Farwell e Wegner (1954, p. 1212); teste com absorção puramente de superfície |
