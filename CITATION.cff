@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "Se usar estes scripts, cite o TCC e este repositório."
+title: "Scripts das figuras do TCC: Desvios da lei de espalhamento alfa de Rutherford"
+authors:
+  - family-names: "de Sousa"
+    given-names: "Alisson Romeu"
+date-released: 2026-11-16
+license: MIT

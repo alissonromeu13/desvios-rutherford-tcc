@@ -1,0 +1,6 @@
+# versões com que as figuras do TCC foram geradas (Python 3.13)
+numpy==2.5.3
+scipy==1.18.1
+matplotlib==3.11.2
+# além disso: uma distribuição LaTeX com XeLaTeX e as fontes Latin Modern (MiKTeX ou TeX Live),
+# porque o estilo usa o backend pgf (texto composto pelo XeLaTeX, com as mesmas fontes do documento)
