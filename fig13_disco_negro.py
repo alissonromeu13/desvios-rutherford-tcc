@@ -39,7 +39,7 @@ for kR, c in [(10, AZUL), (30, LARANJA)]:
             bbox=dict(boxstyle="round,pad=0.1", fc="white", ec="none", alpha=0.85))
     print(f"kR={kR}: theta_1 = {t1:.2f} graus (x_1 = {x1:.4f})")
 a1.plot([], [], color=TINTA, lw=0.8, ls="--", label=r"eiconal: $(kR)^2[J_1(k\theta R)/k\theta R]^2$")
-a1.set(yscale="log", ylim=(1e-3, 3e2), xlim=(0, 45), xlabel=r"$\theta$ [graus]", ylabel=r"$(d\sigma/d\Omega)/R^2$")
+a1.set(yscale="log", ylim=(1e-3, 3e2), xlim=(0, 45), xlabel=r"$\theta$ [graus]", ylabel=r"$(\mathrm{d}\sigma/\mathrm{d}\Omega)/R^2$")
 a1.legend(fontsize=7, loc="upper right")
 
 KR_MIN = 2.0

@@ -29,13 +29,13 @@ print("checagem esfera (numérico vs analítico) max dif =", np.max(np.abs(F_num
 
 fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 3.4), gridspec_kw={"width_ratios": [1, 1.5]})
 a1.plot(r, rho_f, color=TINTA, label="Fermi (2pF)")
-a1.plot(r, rho_hs * simpson(rho_f * r**2, x=r) / simpson(rho_hs * r**2, x=r), color=AZUL, ls="--", label="esfera homogênea (Seç. 2.4.1)")
+a1.plot(r, rho_hs * simpson(rho_f * r**2, x=r) / simpson(rho_hs * r**2, x=r), color=AZUL, ls="--", label="esfera homogênea (seç. 2.4.1)")
 N_f = simpson(rho_f * r**2, x=r)
 re_ = np.exp(-r / a_e); re_n = re_ * N_f / simpson(re_ * r**2, x=r)
 rg = np.exp(-(r / a_g) ** 2); rg_n = rg * N_f / simpson(rg * r**2, x=r)
 print(f"rho(0)/rho0 com o mesmo <r^2> e a mesma carga: exponencial = {re_n[0]:.2f}, gaussiana = {rg_n[0]:.2f}, esfera = {N_f/(R_hs**3/3):.3f}")
-a1.plot(r, re_n, color=LARANJA, ls=":", label="exponencial/dipolo (Seç. 2.4.2)")
-a1.plot(r, rg_n, color=VERDE, ls="-.", label="gaussiana (Seç. 2.4.3)")
+a1.plot(r, re_n, color=LARANJA, ls=":", label="exponencial/dipolo (seç. 2.4.2)")
+a1.plot(r, rg_n, color=VERDE, ls="-.", label="gaussiana (seç. 2.4.3)")
 # escala log: a exponencial, com o mesmo <r^2>, tem rho(0) ~ 13 rho0 e não cabe na escala linear
 a1.set(yscale="log", xlabel=r"$r$ [fm]", ylabel=r"$\rho(r)/\rho_0$", xlim=(0, 12), ylim=(1e-3, 30))
 for F, cc, ls in [(F_f, TINTA, "-"), (F_hs, AZUL, "--"), (F_e, LARANJA, ":"), (F_g, VERDE, "-.")]:

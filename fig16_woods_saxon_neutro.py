@@ -54,7 +54,7 @@ for abs_, c, ls, nome in [(False, AZUL, "--", "real ($W = 0$)"), (True, LARANJA,
     res[abs_] = (S, sel, sr)
     f = nuclear_amplitude(S, 0.0, k, th)
     a1.plot(np.degrees(th), np.abs(f) ** 2 * 10, color=c, ls=ls, label=nome)
-a1.set(yscale="log", xlabel=r"$\theta_\mathrm{cm}$ [graus]", ylabel=r"$d\sigma/d\Omega$ [mb/sr]", xlim=(0, 180), ylim=(1e-2, 4e4))
+a1.set(yscale="log", xlabel=r"$\theta_\mathrm{cm}$ [graus]", ylabel=r"$\mathrm{d}\sigma/\mathrm{d}\Omega$ [mb/sr]", xlim=(0, 180), ylim=(1e-2, 4e4))
 a1.set_xticks([0, 30, 60, 90, 120, 150, 180])
 a1.legend(fontsize=7.5, loc="upper right", title=r"n + $^{208}$Pb, $E = 14$ MeV", title_fontsize=7.5)
 fmt = lambda v: f"{v/1000:.2f}".replace(".", "{,}")

@@ -66,7 +66,7 @@ for V0, c in casos:
     print(f"V0={V0}: xi={xi:.3f}; estados ligados s = {nb}; a0 exato = {a0:+.3f} fm, a_B = {aB:+.3f} fm; "
           f"sigma(0): exato {4*np.pi*a0**2*10:.0f} mb, Born {np.pi**2*xi**2*a**2/4*10:.0f} mb "
           f"(razão {a0**2/aB**2:.2f}); teorema óptico erro máx = {max(opt):.1e}; Born/exato em 300 MeV = {sb[-1]/sx[-1]:.3f}")
-    rot = f"$V_0 = {V0:g}$ MeV ($\\xi = " + f"{xi:.2f}".replace(".", "{,}") + "$)"
+    rot = f"$V_0 = " + f"{V0:.1f}".replace(".", "{,}") + "$ MeV ($\\xi = " + f"{xi:.2f}".replace(".", "{,}") + "$)"
     h1, = a1.plot(E, sx, color=c, ls="-", label=rot + " – exato")
     h2, = a1.plot(E, sb, color=c, ls="--", label=rot + " – Born")
     handles += [h1, h2]
@@ -87,7 +87,7 @@ for V0, c in casos:
     q = 2 * k * np.sin(th / 2)
     a2.plot(np.degrees(th), np.abs(f) ** 2 * 10, color=c, ls="-")
     a2.plot(np.degrees(th), fb(V0, q) ** 2 * 10, color=c, ls="--")
-a2.set(yscale="log", xlabel=r"$\theta_\mathrm{cm}$ [graus]", ylabel=r"$d\sigma/d\Omega$ [mb/sr]", xlim=(0, 180))
+a2.set(yscale="log", xlabel=r"$\theta_\mathrm{cm}$ [graus]", ylabel=r"$\mathrm{d}\sigma/\mathrm{d}\Omega$ [mb/sr]", xlim=(0, 180))
 a2.set_xticks([0, 45, 90, 135, 180])
 a2.text(0.97, 0.95, f"$E_\\mathrm{{cm}} = {Ed:g}$ MeV", transform=a2.transAxes, ha="right", va="top", fontsize=8)
 virgula(a2, "x")

@@ -72,8 +72,12 @@ print(f"ressonância l=3: pico de sigma_3 em kR = {k_pico:.4f} (sigma_3 = {s3[ip
       f"delta_3 = pi/2 em kR = {k_cruz:.4f}")
 print(f"Breit-Wigner: E_R = {ER:.3f}, Gamma = {G:.3f} (unid. hbar^2/2muR^2), Gamma/E_R = {G/ER:.3f}; "
       f"barreira em r=R: l(l+1) = 12 (kR = {np.sqrt(12):.2f})")
+print(f"fase de fundo no ajuste de Breit-Wigner à fase: b0 = {b0:.2f} rad (Seção 4.2.3.1)")
 print(f"atraso de Wigner no pico: Delta t = {dt_max:.2f} vs passagem livre R/v = {t_livre:.3f}  ->  razão {dt_max/t_livre:.0f}")
 assert abs(4 / G - dt_max) / dt_max < 0.05                      # BW: d delta/dE máx = 2/Gamma
+meia = E[s3 >= s3[ip] / 2]                                      # largura a meia-altura de sigma_3(E), citada na Seção 4.2.3.1
+print(f"largura a meia-altura de sigma_3: Gamma = {meia.max() - meia.min():.3f}; E no pico = {k_pico**2:.3f}; "
+      f"Gamma/E_R = {(meia.max() - meia.min()) / k_pico**2:.3f}")
 
 # ------------------------------------------------------------------ figura
 fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(7.2, 3.3), gridspec_kw={"width_ratios": [1.1, 1.1, 0.85]})
@@ -99,7 +103,7 @@ a1.set(xlabel=r"$kR$", ylabel=r"$\sigma_l/\pi R^2$", ylim=(0, 14), xlim=(0, 3))
 # (b) fases absolutas (Levinson)
 for yv in (0.5, 1.5):
     a2.axhline(yv, color=CINZA, lw=0.7, ls="--")
-a2.text(2.97, 0.47, r"$\sin^2\delta_l = 1$", fontsize=6.8, color=CINZA, ha="right", va="top")
+a2.text(2.97, 0.47, r"$\mathrm{sen}^2\delta_l = 1$", fontsize=6.8, color=CINZA, ha="right", va="top")
 for yv, t in [(2, r"$N_b = 2$ ($l=0$)"), (1, r"$N_b = 1$ ($l=1, 2$)"), (0, r"$N_b = 0$ ($l\geq3$)")]:
     a2.text(0.06, yv + 0.05, t, fontsize=6.8, va="bottom")
 a2.plot([k_cruz], [0.5], "o", ms=5, color=TINTA, mec="white", mew=1, zorder=6)
@@ -125,7 +129,7 @@ a3.text(x_out + 0.08, ER + 0.4, "$E_R$", fontsize=7.5, va="bottom")
 a3.text(0.5 * (1 + x_out), -5.5, "túnel", fontsize=6.8, color=CINZA, ha="center")
 a3.text(0.46, -27.5, "poço", fontsize=6.8, color=CINZA)
 a3.text(3.4, -27.5, "$l=3$", fontsize=7.5, ha="right")
-a3.set(xlim=(0.4, 3.5), ylim=(-31, 16), xlabel=r"$r/R$", ylabel=r"$V_\mathrm{ef}\ \,[\hbar^2/2\mu R^2]$")
+a3.set(xlim=(0.4, 3.5), ylim=(-31, 16), xlabel=r"$r/R$", ylabel=r"$V_\mathrm{efetivo}\ \,[\hbar^2/2\mu R^2]$")
 a3.set_xticks([1, 2, 3])
 
 virgula(a1); virgula(a2, "x"); virgula(a3, "x")

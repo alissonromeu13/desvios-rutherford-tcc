@@ -1,4 +1,4 @@
-"""Figura 3 do TCC (Seção 2.3.1) – Regimes do espalhamento alfa-núcleo (parâmetro de Sommerfeld).
+"""Figura 3 do TCC (Seção 2.3.1). O ouro está na energia das partículas de Bieler (7,35 MeV), que o usou como padrão – Regimes do espalhamento alfa-núcleo (parâmetro de Sommerfeld).
 
 (a) diagrama D x lambda_bar_cm (log-log): eta = D/(2 lambda_bar_cm) -> isolinhas de inclinação +1;
     cada sistema percorre uma reta de inclinação +2 quando E varia (D ~ 1/E, lambda_bar ~ 1/sqrt(E)).
@@ -7,7 +7,7 @@
 eta = k_e z Z e^2/(hbar v)          (v = velocidade relativa = velocidade da alfa no laboratório)
 D   = k_e z Z e^2 / E_cm            (máxima aproximação, colisão frontal; E_cm ~ E para alvo pesado)
 R_toque = 1,2 (A_alpha^{1/3} + A^{1/3}) fm  -> barreira coulombiana ~ energia em que D = R_toque
-Fronteiras (convenção do texto): eta < 1 quântico perturbativo (Born para o Coulomb);
+Fronteiras (convenção do texto): eta < 1 perturbativo coulombiano (Born para o Coulomb);
 1 < eta < 4 semiclássico; eta > 4 clássico.
 """
 import numpy as np
@@ -20,8 +20,8 @@ alvos = [("Au", 79, 197, 196.967 * 931.494), ("Al", 13, 27, 26.982 * 931.494), (
 cores = {"Au": AZUL, "Al": LARANJA, "H": VERDE}
 estilos = {"Au": "-", "Al": "--", "H": "-."}
 # experimentos de referência: (alvo, E_lab, rótulo curto, rótulo longo)
-exps = [("Au", 5.0, "Geiger–Marsden", "Geiger–Marsden (1913)\nAu, 5 MeV"),
-        ("Al", 7.68, "Bieler", "Bieler (1924)\nAl, 7,68 MeV"),
+exps = [("Au", 7.35, "Bieler (Au)", "Bieler (1924), padrão\nAu, 7,35 MeV"),
+        ("Al", 7.35, "Bieler (Al)", "Bieler (1924)\nAl, 7,35 MeV"),
         ("H", 7.68, "Chadwick–Bieler", "Chadwick e Bieler (1921)\nH, 7,68 MeV")]
 E = np.logspace(np.log10(0.5), np.log10(50), 400)   # E_lab da alfa (MeV)
 eta_de = lambda E, Z: 2 * Z * ALPHA / np.sqrt(2 * E / M_ALPHA)
@@ -55,7 +55,7 @@ rotulo_isolinha(a1, 4, 6.0, r"$\eta = 4$", fontsize=7.5, color=CINZA)
 for et, x in [(0.1, 12.0), (10, 0.25), (100, 0.25)]:
     rotulo_isolinha(a1, et, x, (f"$\\eta = {et:g}$").replace(".", "{,}"), fontsize=6.5, color=CINZA)
 a1.text(0.03, 0.97, "clássico / semiclássico\n" + r"($\eta > 1$)", transform=a1.transAxes, fontsize=7.5, va="top")
-a1.text(0.97, 0.03, "quântico perturbativo\n" + r"Born ($\eta < 1$)", transform=a1.transAxes, fontsize=7.5, va="bottom", ha="right")
+a1.text(0.97, 0.03, "perturbativo coulombiano\n" + r"Born ($\eta < 1$)", transform=a1.transAxes, fontsize=7.5, va="bottom", ha="right")
 for nome, Z, A, M in alvos:
     lb = lb_de(E, nome); D = D_de(E, nome)
     a1.plot(lb, D, color=cores[nome], ls=estilos[nome])
@@ -70,6 +70,8 @@ for nome, x, curto, _ in exps:
             bbox=dict(boxstyle="round,pad=0.12", fc="white", ec="none", alpha=0.8))
     print(f"{curto}: lambda_bar_cm = {lb:.3f} fm, D = {D:.3f} fm, eta = D/(2 lambda_bar) = {D/(2*lb):.3f}"
           f"  (eta direto = {eta_de(x, dados[nome][0]):.3f})")
+# Seção 4.1.1: ouro e alumínio na mesma energia (a das partículas de Bieler no alumínio)
+print(f"7,35 MeV: beta = {np.sqrt(2 * 7.35 / M_ALPHA):.4f}, eta(Au) = {eta_de(7.35, 79):.2f}, eta(Al) = {eta_de(7.35, 13):.2f}")
 # checagem: a reta eta = 1 passa por (1 fm, 2 fm) e tem inclinação 1
 print("isolinha eta=1 em lambda=1 fm:", 2 * 1 * 1.0, "fm; inclinação:", np.polyfit(np.log(xx), np.log(2 * xx), 1)[0])
 # seta: sentido de energia crescente
@@ -100,7 +102,7 @@ for nome, x, curto, _ in exps:
     M = dados[nome][2]; Ecm = x * M / (M + M_ALPHA)
     a2.annotate(curto, (x, y), xytext=o, textcoords="offset points", fontsize=7,
                 ha="right" if o[0] < 0 else "left", va="center" if o[0] < 0 else "bottom",
-                bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.85) if o[0] < 0 else None)
+                bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.85), zorder=6)
     print(f"{curto}: E_cm = {Ecm:.3f} MeV, D = {D_de(x, nome):.2f} fm, R_toque = {Rt_de(nome):.2f} fm, D/R_toque = {y:.2f}")
 a2.set(xscale="log", yscale="log", ylim=(ymin_b, ymax_b),
        xlabel=r"$E_\alpha$ (lab) [MeV]", ylabel=r"$D/R_\mathrm{toque}$")

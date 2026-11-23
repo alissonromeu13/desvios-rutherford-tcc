@@ -68,6 +68,9 @@ if __name__ == "__main__":
     Sr, kr, er = calc(E_RaC, W=0.0)
     rr = ratio_lab(Sr, kr, er, np.radians(thl))
     print(f"real em 7,35 MeV: min = {rr.min():.3f} em {thl[np.argmin(rr)]:.0f} graus; max = {rr.max():.2f}")
+    rcx = ratio_lab(Sc, k, eta, np.radians(thl)); imx = np.argmax(rcx)
+    print(f"real em 7,35 MeV: maior pico abaixo de 165 graus = {rr[thl < 165].max():.2f}; o máximo de {rr.max():.2f} é a borda da malha ({thl[-1]:.0f} graus)")
+    print(f"complexo em 7,35 MeV: máximo = {rcx[imx]:.3f} em {thl[imx]:.0f} graus; decrescente depois disso: {bool(np.all(np.diff(rcx[imx:]) < 0))}")
     a1.plot(thl, rr, color=AZUL, ls="--", label=r"real ($W=0$), $" + fmtE(E_RaC) + r"$ MeV")
     Sp, kp, ep = calc(E_Po)
     a1.plot(thl, ratio_lab(Sp, kp, ep, np.radians(thl)), color=VERDE, lw=1.2,
