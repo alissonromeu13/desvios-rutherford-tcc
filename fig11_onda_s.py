@@ -1,4 +1,5 @@
-"""Figura 11 do TCC (Seção 4.2.2) – Onda s no poço quadrado esférico, resultados analíticos.
+"""Figura 10 do TCC (Seção 4.2.2) – Comprimento de espalhamento da onda s no poço quadrado esférico.
+ Painel único (v1.2): a seção de choque em função de kR foi retirada por exceder o regime kR << 1 da seção.
 
  delta_0 = -kR + arctan[(k/K) tan(KR)],  K = sqrt(k^2 + K0^2),  K0^2 = 2 mu V0/hbar^2
  a_0 = R [1 - tan(K0 R)/(K0 R)]                     (comprimento de espalhamento)
@@ -59,7 +60,7 @@ for nome, a, r, lo, hi in [("singleto", -23.74, 2.77, 1.0, np.pi / 2 - 1e-6),
     np_canais[nome] = (x, a / R)
 
 # ------------------------------------------------------------------ figura
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 3.6), gridspec_kw={"width_ratios": [1.15, 1]})
+fig, a1 = plt.subplots(figsize=(4.6, 3.4))
 ymin, ymax = -11, 8
 polos = [(n + 0.5) * np.pi for n in range(3)]
 limites = [0] + polos + [3 * np.pi]
@@ -74,23 +75,23 @@ for n in range(4):                                         # ramos separados: se
     a1.plot(x, a0_de(x), color=AZUL, lw=1.5)
 a1.axhline(0, color=TINTA, lw=0.6)
 a1.axhline(1, color=CINZA, ls="--", lw=1)
-a1.text(5.2, 2.0, "$a_0 = R$ (esfera rígida)", fontsize=6.5, color=CINZA, va="bottom")
+a1.text(5.2, 2.0, "$a_0 = R$", fontsize=7, color=CINZA, va="bottom")
 for xc in (np.pi, 2 * np.pi, 3 * np.pi):                  # cruzamentos a0 = R
     a1.plot([xc], [1], "o", ms=4.5, mfc="white", mec=CINZA, mew=1, zorder=4, clip_on=False)
 for K0R, c in [(1.0, AZUL), (1.45, LARANJA), (np.pi, VERDE)]:
     a1.plot([K0R], [a0_de(K0R)], "o", color=c, ms=5, mec="white", zorder=5)
 # estados no limiar
-a1.annotate("estado virtual\n($a_0 \\to -\\infty$)", xy=(np.pi / 2 - 0.04, -7.2), xytext=(2.0, -6.2),
+a1.annotate("estado virtual", xy=(np.pi / 2 - 0.04, -7.2), xytext=(2.0, -6.2),
             fontsize=7, color=TINTA, va="center", arrowprops=dict(arrowstyle="->", lw=0.6, color=TINTA))
-a1.annotate("estado ligado raso\n($a_0 \\to +\\infty$)", xy=(np.pi / 2 + 0.06, 6.0), xytext=(2.1, 4.6),
+a1.annotate("estado ligado raso", xy=(np.pi / 2 + 0.06, 6.0), xytext=(2.1, 4.6),
             fontsize=7, color=TINTA, va="center", arrowprops=dict(arrowstyle="->", lw=0.6, color=TINTA))
 # sistema nêutron-próton
 xs_, ys_ = np_canais["singleto"]; xt_, yt_ = np_canais["tripleto"]
 a1.plot([xs_], [ys_], "D", ms=5, color=TINTA, mec="white", zorder=6)
 a1.plot([xt_], [yt_], "s", ms=5, color=TINTA, mec="white", zorder=6)
-a1.text(xs_ + 0.28, ys_, r"n–p $^1S_0$", fontsize=7, va="center",
+a1.text(xs_ + 0.28, ys_, r"$^1S_0$", fontsize=7, va="center",
         bbox=dict(boxstyle="round,pad=0.12", fc="white", ec="none", alpha=0.85))
-a1.text(xt_ + 0.15, yt_ + 0.25, r"n–p $^3S_1$ (dêuteron)", fontsize=7, va="bottom",
+a1.text(xt_ + 0.15, yt_ + 0.25, r"$^3S_1$ (dêuteron)", fontsize=7, va="bottom",
         bbox=dict(boxstyle="round,pad=0.12", fc="white", ec="none", alpha=0.85))
 a1.set(xlabel=r"$K_0R=\sqrt{2\mu V_0}\,R/\hbar$", ylabel=r"$a_0/R$", ylim=(ymin, ymax), xlim=(0, 3 * np.pi))
 a1.set_xticks([0, np.pi / 2, np.pi, 3 * np.pi / 2, 2 * np.pi, 5 * np.pi / 2, 3 * np.pi])
@@ -99,30 +100,15 @@ from matplotlib.ticker import FixedLocator
 a1.yaxis.set_major_locator(FixedLocator([-10, -8, -6, -4, -2, 0, 2, 4, 6, 8]))
 virgula(a1, "y")
 
+# checagem numérica da expansão de alcance efetivo (não desenhada)
 kR = np.linspace(1e-3, 4, 1600)
-a2.fill_between(kR, 1e-3, 4 / kR**2, color=CINZA, alpha=0.07, lw=0)
-a2.plot(kR, 4 / kR**2, color=CINZA, lw=0.9, label=r"limite unitário $4\pi/k^2$")
-for K0R, c, ls in [(1.0, AZUL, "-"), (1.45, LARANJA, "--"), (np.pi, VERDE, "-.")]:
-    s0 = 4 * np.sin(delta0(kR, K0R)) ** 2 / kR**2            # sigma_0 / (pi R^2)
-    a2.plot(kR, s0, color=c, ls=ls, label=("$K_0R=" + f"{K0R:.2f}".replace(".", "{,}") + "$"))
-a2.plot(kR, 4 * np.sin(kR) ** 2 / kR**2, color=AMARELO, ls=":", lw=2, label="esfera rígida")
-# ERE para K0R = 1,45
 K0R = 1.45; a, r = a0_de(K0R), re_de(K0R)
 kcot = -1 / a + 0.5 * r * kR**2
 s_ere = 4 / (kR**2 + kcot**2)
 s_ex = 4 * np.sin(delta0(kR, K0R)) ** 2 / kR**2
-a2.plot(kR, s_ere, color=TINTA, lw=0.9, ls=(0, (1, 1.5)), label="alcance efetivo ($K_0R=1{,}45$)")
 dev = np.abs(s_ere / s_ex - 1)
 k5 = kR[np.argmax(dev > 0.05)]
 print(f"K0R=1,45: a0/R = {a:.3f}, r_e/R = {r:.4f}; ERE desvia mais de 5% do exato a partir de kR = {k5:.2f}")
-a2.axhline(1, color=CINZA, lw=0.6, ls="--")
-a2.text(3.0, 1.15, r"$\pi R^2$ (clássico)", fontsize=7.5, color=CINZA)
-a2.annotate(r"$4\pi R^2$", (0.02, 4), xytext=(0.5, 9), fontsize=8, arrowprops=dict(arrowstyle="->", lw=0.7))
-a2.text(0.12, 0.08, "região permitida\n($|S_0| \\leq 1$)", fontsize=7, color=CINZA)
-a2.set(yscale="log", ylim=(0.05, 300), xlim=(0, 4), xlabel=r"$kR$", ylabel=r"$\sigma_0/\pi R^2$")
-a2.legend(fontsize=7, loc="upper right")
-virgula(a2, "x")
-rotulo(a1, "a"); rotulo(a2, "b")
 fig.tight_layout()
 salvar(fig, "6.3/fig03_onda_s_comprimento_espalhamento_v2")
 for K0R in [1.0, 1.45]:

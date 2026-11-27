@@ -1,4 +1,4 @@
-"""Figura 10 do TCC (Seção 4.1.2) – Interferência Coulomb-nuclear na 1ª aproximação de Born (poço quadrado real).
+"""Figura 9 do TCC (Seção 4.1.2) – Interferência Coulomb-nuclear na 1ª aproximação de Born (poço quadrado real).
 
 sigma/sigma_R = [1 - g x j1(x)]^2,  x = qR = 2kR sen(theta_cm/2),  g = V0/V_C(R) = V0 R/(k_e z Z e^2).
 
@@ -6,7 +6,7 @@ sigma/sigma_R = [1 - g x j1(x)]^2,  x = qR = 2kR sen(theta_cm/2),  g = V0/V_C(R)
 (b) Dados de Bieler (1924), Tabs. II (Al, RaC, alcance médio 6,6 cm) e III (Mg, RaC, 6,2 cm), p. 445;
     faixas angulares da Tab. I (p. 445). Cada ponto é uma média sobre uma faixa de ângulo de laboratório:
     o modelo é comparado com a mesma média, ponderada pelo número de partículas de Rutherford na geometria
-    de Bieler (folha anular, fonte e anteparo no eixo): peso cossec^3(theta/2) (Bieler 1924, p. 438, Eq. 1; Apêndice F). Conversão lab -> CM exata para colisão elástica (só depende de m/M).
+    de Bieler (folha anular, fonte e anteparo no eixo): peso cossec^3(theta/2) (Bieler 1924, p. 438, Eq. 1; Apêndice D). Conversão lab -> CM exata para colisão elástica (só depende de m/M).
     kR_ef e K são parâmetros de AJUSTE (mínimos quadrados ponderados), não grandezas derivadas.
     Al: ajuste de dois parâmetros. Mg (3 pontos): kR_ef = (kR_ef/kR_fís do Al) × kR_fís do Mg, ajusta-se só K.
 """
@@ -57,7 +57,7 @@ def angulo_efetivo(a, b, tau):
     return np.degrees(num / quad(lambda t: peso_rutherford_lab(t, tau), a, b)[0])
 
 def k_fisico(M, alcance):
-    """Energia pela lei de Geiger (v^3 ∝ alcance), com a mesma âncora do Apêndice F e da Figura 17:
+    """Energia pela lei de Geiger (v^3 ∝ alcance), com a mesma âncora do Apêndice D e da Figura 14:
     v0 = 1,92e9 cm/s para 7,0 cm de ar, isto é, E(7,0 cm) = 7,644 MeV (Evans 1955, p. 512, Tab. 1.1, arredondado)."""
     E = 7.644 * (alcance / 7.0) ** (2 / 3)
     mu = M_ALFA * M / (M_ALFA + M) * 931.494

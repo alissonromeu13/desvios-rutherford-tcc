@@ -4,7 +4,7 @@ title: "Scripts das figuras do TCC: Desvios da lei de espalhamento alfa de Ruthe
 authors:
   - family-names: "Sousa"
     given-names: "Alisson Romeu de"
-version: "1.1"
-date-released: 2026-11-22
+version: "1.2"
+date-released: 2026-11-27
 license: MIT
 repository-code: "https://github.com/alissonromeu13/desvios-rutherford-tcc"

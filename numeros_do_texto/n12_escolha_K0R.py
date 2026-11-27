@@ -1,9 +1,9 @@
-"""Origem da escolha K0R = 5,30 na Figura 12 e no diagrama de Argand de extras/ (poço quadrado atrativo, unidades de R).
+"""Origem da escolha K0R = 5,30 na Figura 11 e no diagrama de Argand de extras/ (poço quadrado atrativo, unidades de R).
 Varre K0R e registra, para l = 1, 2 e 3, a posição (kR) e a largura aproximada (faixa de kR com sin^2 delta_l > 1/2)
 do primeiro máximo de sin^2 delta_l com kR < 2,5. Critério usado: uma ressonância de forma estreita, em energia
 baixa o bastante para que poucas ondas parciais contribuam, e larga o bastante para ser resolvida no gráfico.
 Com K0R = 5,3, a onda l = 3 ressoa em kR ≈ 1,83 com largura ≈ 0,12 (para K0R = 5,6 a largura já cai a 0,01).
-Fórmula de tan delta_l: a mesma da Figura 12 (Seção 4.2.3)."""
+Fórmula de tan delta_l: a mesma da Figura 11 (Seção 4.2.3)."""
 import numpy as np
 from scipy.special import spherical_jn as j, spherical_yn as y
 

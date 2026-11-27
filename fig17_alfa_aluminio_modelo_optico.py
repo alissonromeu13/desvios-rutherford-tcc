@@ -1,5 +1,5 @@
-"""Figura 17 do TCC (Seção 4.4.3) – Modelo óptico completo (Coulomb + Woods-Saxon complexo) para alfa + 27Al
-comparado aos dados de Bieler (1924) (Tabela do Apêndice F) e predição da função de excitação a ângulo fixo
+"""Figura 14 do TCC (Seção 4.4.3) – Modelo óptico completo (Coulomb + Woods-Saxon complexo) para alfa + 27Al
+comparado aos dados de Bieler (1924) (Tabela do Apêndice D) e predição da função de excitação a ângulo fixo
 (arranjo de Rutherford & Chadwick, 1925).
 
 Potencial: U(r) = V_C(r; R_C) - V f(r;R,a) - i W f(r;R,a),  R = 1,40 A^{1/3}, a = 0,52 fm,
@@ -36,7 +36,7 @@ dat = np.array([1.00, 0.94, 0.78, 0.71]); err = np.array([0.03, 0.02, 0.02, 0.02
 def binned(S, k, eta):
     """Razão sigma/sigma_R média em cada diafragma, ponderada pelo número de partículas que a lei de Rutherford
     prevê na geometria de Bieler (folha anular, fonte e anteparo no eixo): peso cossec^3(theta_lab/2)
-    (Bieler 1924, p. 438, Eq. 1; Apêndice F). É a mesma média usada na Figura 10."""
+    (Bieler 1924, p. 438, Eq. 1; Apêndice D). É a mesma média usada na Figura 9."""
     out = []
     for b in np.radians(bins):
         tl = np.linspace(*b, 600); w = np.sin(tl / 2) ** -3
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     print("convergência lmax 25->40: max dif =", np.max(np.abs(ratio_lab(S1, k, eta, th) - ratio_lab(S2, k, eta, th))))
     print(f"eta = {eta:.3f}, k = {k:.3f} fm^-1;  |S_l| (l=0..8):", np.round(np.abs(S1[:9]), 3))
 
-    # energias pelos alcances médios de Bieler (1924, Tab. II): E = E(7,0 cm) (R/7,0)^(2/3), E(7,0 cm) = 7,644 MeV (Apêndice F)
+    # energias pelos alcances médios de Bieler (1924, Tab. II): E = E(7,0 cm) (R/7,0)^(2/3), E(7,0 cm) = 7,644 MeV (Apêndice D)
     Eal = lambda R: 7.644 * (R / 7.0) ** (2 / 3)
     E_RaC, E_Po = Eal(6.6), Eal(3.4)
     print(f"E(RaC, 6,6 cm) = {E_RaC:.3f} MeV;  E(Po, 3,4 cm) = {E_Po:.3f} MeV")

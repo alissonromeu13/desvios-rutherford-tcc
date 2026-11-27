@@ -1,7 +1,7 @@
 """Figura 6 do TCC (Seção 2.4.2) – Distribuição exponencial rho ~ exp(-r/a) e fator de forma de dipolo F(x) = 1/(1+x²)², x = qa.
 (a) F e |F|² em escala linear, com a aproximação de q pequeno F ≈ 1 − q²<r²>/6 = 1 − 2x² (<r²> = 12 a²);
-(b) |F|² em escala log, com a assíntota x^-8. Sem zeros. Cores: laranja = exponencial (como na Figura 9).
-A comparação com os outros modelos, com o mesmo <r²>, fica na Seção 2.4.5 (Figura 9)."""
+(b) |F|² em escala log, com a assíntota x^-8. Sem zeros. Cores: laranja = exponencial (como na Figura 8).
+A comparação com os outros modelos, com o mesmo <r²>, fica na Seção 2.4.4 (Figura 8)."""
 import numpy as np
 from estilo import *
 

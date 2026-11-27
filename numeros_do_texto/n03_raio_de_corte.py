@@ -1,9 +1,9 @@
-"""Raio de corte da condição de fase (Seção 2.3.3).
+"""Raio de corte da condição de fase (Seção 2.3.3); R_b é o comprimento de blindagem.
 Ao longo de uma reta com parâmetro de impacto b, a fase acumulada no potencial coulombiano blindado
-V = k_e zZe^2 e^(-r/R)/r é (1/hbar v) int |V| ds = 2 eta K0(b/R)  (Abramowitz e Stegun, p. 376, eq. 9.6.24).
-A condição 2 eta K0(r_lim/R) = 1 é resolvida numericamente e comparada às formas assintóticas:
-  eta << 1:  r_lim ~ 2R exp(-gamma_E) exp(-1/(2 eta))       (eq. 9.6.13, p. 375)
-  eta >> 1:  x = r_lim/R ~ ln(sqrt(2 pi) eta) - (1/2) ln ln(sqrt(2 pi) eta)   (eq. 9.7.2, p. 378)
+V = k_e zZe^2 e^(-r/R_b)/r é (1/hbar v) int |V| ds = 2 eta K0(b/R_b)  (Abramowitz e Stegun, p. 376, eq. 9.6.24).
+A condição 2 eta K0(r_lim/R_b) = 1 é resolvida numericamente e comparada às formas assintóticas:
+  eta << 1:  r_lim ~ 2R_b exp(-gamma_E) exp(-1/(2 eta))       (eq. 9.6.13, p. 375)
+  eta >> 1:  x = r_lim/R_b ~ ln(sqrt(2 pi) eta) - (1/2) ln ln(sqrt(2 pi) eta)   (eq. 9.7.2, p. 378)
 Também imprime o critério de altas energias de Sakurai (p. 387, eq. 6.85), 2 eta ln(k a) << 1, e a fase na escala
 do comprimento de onda reduzido para os elétrons de 10 keV no hidrogênio."""
 import numpy as np
@@ -15,11 +15,11 @@ alfa = 1 / 137.035999084
 fase = lambda x, eta: 2 * eta * k0(x)
 raiz = lambda eta: brentq(lambda x: fase(x, eta) - 1, 1e-14, 60)
 
-print("alfa + H (eta = 0,23):  numérico r_lim/R = %.3f;  fórmula 2 e^-gamma e^(-1/2eta) = %.3f"
+print("alfa + H (eta = 0,23):  numérico r_lim/R_b = %.3f;  fórmula 2 e^-gamma e^(-1/2eta) = %.3f"
       % (raiz(0.23), 2 * np.exp(-gE) * np.exp(-1 / 0.46)))
 eta = 18.36   # ouro a 7,35 MeV, a energia das partículas de Bieler (Seção 4.1.1)
 y = np.log(np.sqrt(2 * np.pi) * eta)
-print("ouro (eta = 18,4):      numérico r_lim/R = %.2f;  assintótica = %.2f;  ln(2 eta) = %.2f" % (raiz(eta), y - 0.5 * np.log(y), np.log(2 * eta)))
+print("ouro (eta = 18,4):      numérico r_lim/R_b = %.2f;  assintótica = %.2f;  ln(2 eta) = %.2f" % (raiz(eta), y - 0.5 * np.log(y), np.log(2 * eta)))
 
 # elétrons de 10 keV no hidrogênio
 me = 0.51099895; T = 0.010

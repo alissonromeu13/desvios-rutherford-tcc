@@ -1,4 +1,4 @@
-"""Figura 16 do TCC (Seção 4.4.2) – Partícula neutra no potencial óptico de Woods-Saxon: n + 208Pb, E_lab = 14 MeV.
+"""Figura 13 do TCC (Seção 4.4.2) – Partícula neutra no potencial óptico de Woods-Saxon: n + 208Pb, E_lab = 14 MeV.
 
 Potencial óptico local de Koning & Delaroche, Nucl. Phys. A 713 (2003) 231, SEM o termo spin-órbita:
   U(r) = -V_V f(r;R_V,a_V) - i W_V f(r;R_V,a_V) + 4 i a_D W_D d/dr f(r;R_D,a_D)        (Eqs. 1-3, p. 240-241)
@@ -69,16 +69,16 @@ for abs_, c, ls in [(False, AZUL, "--"), (True, LARANJA, "-")]:
     S = res[abs_][0]
     a2.plot(np.arange(len(S)), np.abs(S), color=c, ls=ls, marker="o", ms=3)
 eta = np.abs(res[True][0]); lmin = int(np.argmin(eta[:15]))
-a2.set(xlabel=r"$l$", ylabel=r"$\eta_l = |S_l|$", ylim=(0, 1.05), xlim=(0, 20))
+a2.set(xlabel=r"$l$", ylabel=r"$|S_l|$", ylim=(0, 1.05), xlim=(0, 20))
 a2.axvline(k * RV, color=TINTA, lw=1.0, ls=(0, (4, 2)))
 a2.text(k * RV + 0.35, 0.03, r"$l \approx kR \approx " + f"{k*RV:.1f}".replace(".", "{,}") + "$", fontsize=7.5)
 a2.annotate("absorção máxima\n" + r"em $l \approx kR$", xy=(lmin, eta[lmin]), xytext=(10.5, 0.30),
             fontsize=6.8, va="center", arrowprops=dict(arrowstyle="->", lw=0.6, color=TINTA))
-a2.text(19.6, 0.94, r"$\eta_l \to 1$: ondas" + "\nperiféricas livres", fontsize=6.8, ha="right", va="top", color=CINZA)
+a2.text(19.6, 0.66, r"$|S_l| \to 1$ para ondas" + "\nque não alcançam o núcleo", fontsize=6.8, ha="right", va="top", color=CINZA)
 virgula(a2, "y")
 rotulo(a1, "a"); rotulo(a2, "b")
 fig.tight_layout()
-salvar(fig, "6.4/fig07_woods_saxon_neutro_v4")
+salvar(fig, "6.4/fig07_woods_saxon_neutro_v5")
 
 # ---------------------------------------------------------------- números citados no texto
 thf = np.radians(np.linspace(0.2, 180, 9000))
@@ -88,6 +88,6 @@ for abs_ in (False, True):
     print(("complexo" if abs_ else "real    "), "mínimos (graus, mb/sr):",
           [(round(float(np.degrees(thf[j])), 1), float(f"{ds[j]:.3g}")) for j in i],
           f"| dsig(0) = {ds[0]:.0f}, dsig(180) = {ds[-1]:.0f} mb/sr")
-print("eta_l (complexo), l = 0..12:", np.round(eta[:13], 3), "| mínimo em l =", lmin,
+print("|S_l| (complexo), l = 0..12:", np.round(eta[:13], 3), "| mínimo em l =", lmin,
       "| b_l = (l+1/2)/k:", np.round((np.arange(13) + 0.5) / k, 2))
 print(f"pi/(kR_V) = {np.degrees(np.pi/(k*RV)):.1f} graus; E_cm = {Ecm:.3f} MeV")

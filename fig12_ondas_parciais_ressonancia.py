@@ -1,8 +1,8 @@
-"""Figura 12 do TCC (Seção 4.2.3) – Seções de choque parciais e ressonância de forma. Poço quadrado atrativo,
+"""Figura 11 do TCC (Seção 4.2.3) – Seções de choque parciais e ressonância de forma. Poço quadrado atrativo,
 K0R = 5,3 (analítico). Unidades: kR adimensional; energias em hbar^2/(2 mu R^2), isto é, E -> (kR)^2.
 
   tan delta_l = [k j_l'(kR) j_l(KR) - K j_l(kR) j_l'(KR)] / [k y_l'(kR) j_l(KR) - K y_l(kR) j_l'(KR)]
-  sigma_l = (4 pi/k^2)(2l+1) sin^2 delta_l  <=  (4 pi/k^2)(2l+1)   (limite unitário)
+  sigma_l = (4 pi/k^2)(2l+1) sin^2 delta_l  <=  (4 pi/k^2)(2l+1)   (limite de unitariedade)
   Levinson: delta_l(0) = N_b(l) pi;  N_b(0) = # {(n+1/2)pi < K0R},  N_b(l>=1) = # zeros de j_{l-1} abaixo de K0R
   Breit-Wigner: delta_3 = delta_bg + arctan[(Gamma/2)/(E_R - E)];  atraso de Wigner Delta t = 2 hbar d delta/dE
   Potencial efetivo (inset): (2 mu R^2/hbar^2) V_ef = -(K0R)^2 Theta(1 - r/R) + l(l+1)/(r/R)^2
@@ -54,7 +54,7 @@ deltas = {l: delta_abs(l, kR) for l in range(LMAX + 1)}
 sig = {l: 4 * (2 * l + 1) * np.sin(deltas[l]) ** 2 / kR**2 for l in deltas}   # em unidades de pi R^2
 for l in sig:
     assert np.all(sig[l] <= 4 * (2 * l + 1) / kR**2 + 1e-12)
-print("limite unitário respeitado para l = 0..5")
+print("limite de unitariedade respeitado para l = 0..5")
 tot = sum(sig.values())
 
 # ressonância l = 3: pico, cruzamento de pi/2, ajuste Breit-Wigner, atraso de Wigner
@@ -91,7 +91,7 @@ h, = a1.plot(kR, tot, color=TINTA, lw=1.0, label=r"total ($l\leq5$)"); handles.a
 
 # (a) seções de choque
 a1.plot(kR, 28 / kR**2, color=AMARELO, lw=0.8, ls=(0, (1, 2)))
-a1.text(2.25, 6.4, "limite\nunitário $l=3$", fontsize=6.8, color=CINZA, va="bottom")
+a1.text(2.25, 6.4, "limite de\nunitariedade ($l=3$)", fontsize=6.8, color=CINZA, va="bottom")
 a1.plot([k_pico], [s3[ip]], "o", ms=5, color=TINTA, mec="white", mew=1, zorder=6)
 txt = ("ressonância $l=3$\n"
        + f"$kR_R \\approx {k_pico:.2f}$".replace(".", "{,}"))

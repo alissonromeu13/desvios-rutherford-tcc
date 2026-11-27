@@ -1,7 +1,7 @@
 """Figura 7 do TCC (Seção 2.4.3) – Distribuição gaussiana rho ~ exp(-r²/a²) e fator de forma F(x) = exp(-x²/4), x = qa.
 <r²> = 3a²/2  =>  F ≈ 1 − q²<r²>/6 = 1 − x²/4 para q pequeno.
 (a) F e |F|² em escala linear, com a aproximação de q pequeno; (b) ln|F|² = −x²/2: reta em função de x²
-(decaimento mais rápido que qualquer potência de q). Cor: verde = gaussiana (como na Figura 9)."""
+(decaimento mais rápido que qualquer potência de q). Cor: verde = gaussiana (como na Figura 8)."""
 import numpy as np
 from estilo import *
 

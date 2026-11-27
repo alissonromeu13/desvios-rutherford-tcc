@@ -1,7 +1,7 @@
 """Fator de forma de carga confrontado com Bieler (Seção 4.1.2).
 Na primeira aproximação de Born, sigma/sigma_R = |F(q)|^2. Esfera homogênea, R = 1,2 A^(1/3) fm,
-partículas do RaC no alumínio com E_lab = 7,35 MeV (Apêndice F), k = 1,033 fm^-1 no centro de massa,
-ângulos efetivos de laboratório dos quatro diafragmas (Tabela do Apêndice F) convertidos ao centro de massa (Apêndice E).
+partículas do RaC no alumínio com E_lab = 7,35 MeV (Apêndice D), k = 1,033 fm^-1 no centro de massa,
+ângulos efetivos de laboratório dos quatro diafragmas (Tabela do Apêndice D) convertidos ao centro de massa (Apêndice C).
 Também as distribuições exponencial e gaussiana, com o mesmo raio quadrático médio: a conclusão não depende do modelo."""
 import numpy as np
 

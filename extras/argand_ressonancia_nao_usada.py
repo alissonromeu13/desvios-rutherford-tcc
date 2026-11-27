@@ -1,5 +1,5 @@
 """Figura NÃO usada no TCC (guardada como possível apêndice) – Diagrama de Argand e atraso de Wigner da ressonância de forma l = 3
-(mesmo poço da Figura 12: K0R = 5,3; energias em hbar^2/(2 mu R^2), E = (kR)^2).
+(mesmo poço da Figura 11: K0R = 5,3; energias em hbar^2/(2 mu R^2), E = (kR)^2).
 
   T_l = e^{i delta_l} sin(delta_l) = (S_l - 1)/(2i)      -> círculo de unitariedade |T - i/2| = 1/2
   Breit-Wigner: delta = delta_bg + arctan[(Gamma/2)/(E_R - E)]
@@ -34,7 +34,7 @@ S3 = np.exp(2j * d3)
 assert np.allclose(np.abs(T3 - 0.5j), 0.5, atol=1e-12) and np.allclose(T3, (S3 - 1) / 2j)
 print("unitariedade: |T_3 - i/2| = 1/2 em todos os pontos")
 
-# ajuste de Breit-Wigner (mesmo procedimento da Figura 12)
+# ajuste de Breit-Wigner (mesmo procedimento da Figura 11)
 bw = lambda E, ER, G, b0, b1: b0 + b1 * (E - 3.3) + np.arctan2(G / 2, ER - E)
 m = (E > 2.9) & (E < 3.8)
 (ER, G, b0, b1), _ = curve_fit(bw, E[m], d3[m], p0=(3.3, 0.4, 0, 0))

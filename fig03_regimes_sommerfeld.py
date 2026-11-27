@@ -7,8 +7,8 @@
 eta = k_e z Z e^2/(hbar v)          (v = velocidade relativa = velocidade da alfa no laboratório)
 D   = k_e z Z e^2 / E_cm            (máxima aproximação, colisão frontal; E_cm ~ E para alvo pesado)
 R_toque = 1,2 (A_alpha^{1/3} + A^{1/3}) fm  -> barreira coulombiana ~ energia em que D = R_toque
-Fronteiras (convenção do texto): eta < 1 perturbativo coulombiano (Born para o Coulomb);
-1 < eta < 4 semiclássico; eta > 4 clássico.
+Fronteiras (convenção do texto): eta < 1 perturbativo coulombiano; 1 < eta < 4 semiclássico;
+eta > 4 clássico. No painel (a), cada regime tem uma faixa de fundo própria.
 """
 import numpy as np
 from estilo import *   # define o backend (pgf) antes de qualquer outro import do matplotlib
@@ -36,8 +36,9 @@ mu_de = lambda nome: M_ALPHA * dados[nome][2] / (M_ALPHA + dados[nome][2])
 lb_de = lambda E, nome: HBARC / np.sqrt(2 * mu_de(nome) * E * dados[nome][2] / (dados[nome][2] + M_ALPHA))
 xmin, xmax, ymin, ymax = 0.2, 30, 0.2, 800
 xx = np.logspace(np.log10(xmin), np.log10(xmax), 200)
-a1.fill_between(xx, 2 * xx, ymax, color="#eda100", alpha=0.10, lw=0)   # eta > 1
-a1.fill_between(xx, ymin, 2 * xx, color=AZUL, alpha=0.09, lw=0)       # eta < 1
+a1.fill_between(xx, 8 * xx, ymax, color="#eda100", alpha=0.24, lw=0)   # eta > 4: clássico
+a1.fill_between(xx, 2 * xx, 8 * xx, color="#eda100", alpha=0.09, lw=0)  # 1 < eta < 4: semiclássico
+a1.fill_between(xx, ymin, 2 * xx, color=AZUL, alpha=0.20, lw=0)       # eta < 1: perturbativo coulombiano
 for et in (0.1, 10, 100):
     a1.plot(xx, 2 * et * xx, color=CINZA, lw=0.5, ls=(0, (1, 2)))
 a1.plot(xx, 8 * xx, color=CINZA, lw=0.8, ls=":")
@@ -54,8 +55,9 @@ rotulo_isolinha(a1, 1, 6.0, r"$\eta = 1$", fontsize=8, color=TINTA)
 rotulo_isolinha(a1, 4, 6.0, r"$\eta = 4$", fontsize=7.5, color=CINZA)
 for et, x in [(0.1, 12.0), (10, 0.25), (100, 0.25)]:
     rotulo_isolinha(a1, et, x, (f"$\\eta = {et:g}$").replace(".", "{,}"), fontsize=6.5, color=CINZA)
-a1.text(0.03, 0.97, "clássico / semiclássico\n" + r"($\eta > 1$)", transform=a1.transAxes, fontsize=7.5, va="top")
-a1.text(0.97, 0.03, "perturbativo coulombiano\n" + r"Born ($\eta < 1$)", transform=a1.transAxes, fontsize=7.5, va="bottom", ha="right")
+a1.text(0.03, 0.97, "clássico\n" + r"($\eta > 4$)", transform=a1.transAxes, fontsize=7.5, va="top")
+rotulo_isolinha(a1, 1.12, 1.25, r"semiclássico ($1 < \eta < 4$)", fontsize=7, color=TINTA)
+a1.text(0.97, 0.03, "perturbativo coulombiano\n" + r"($\eta < 1$)", transform=a1.transAxes, fontsize=7.5, va="bottom", ha="right")
 for nome, Z, A, M in alvos:
     lb = lb_de(E, nome); D = D_de(E, nome)
     a1.plot(lb, D, color=cores[nome], ls=estilos[nome])

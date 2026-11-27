@@ -1,4 +1,4 @@
-"""Números da Seção 4.4.3 (alfa + 27Al, Figura 17) que não aparecem na própria figura.
+"""Números da Seção 4.4.3 (alfa + 27Al, Figura 14) que não aparecem na própria figura.
 Cada bloco imprime um número citado no texto, com a fonte dos parâmetros.
   1. Verificação da implementação: sigma_reação em 24,7 MeV para os três potenciais de McFadden e Satchler
      para o Al (1966, p. 187, Tab. 3), comparada aos valores publicados (1231, 1208 e 1159 mb).
@@ -37,11 +37,11 @@ def razao(Elab, thl, pot=POT_TCC):
     S, k, eta = calc(Elab, *pot[:4], WD=pot[4] if len(pot) > 4 else 0.0)
     return ratio_to_rutherford(S, eta, k, lab_to_cm_angle(np.radians(np.atleast_1d(thl)), M_ALPHA, mT))
 
-# diafragmas de Bieler (1924, p. 445, Tabs. I e II) e média com peso cossec^3(theta/2) (p. 438, Eq. 1; Apêndice F)
+# diafragmas de Bieler (1924, p. 445, Tabs. I e II) e média com peso cossec^3(theta/2) (p. 438, Eq. 1; Apêndice D)
 BINS = np.array([[17.6, 23.6], [23.7, 44.2], [43.9, 59.7], [60.3, 99.5]])
 RAC = (np.array([1.00, 0.94, 0.78, 0.71]), np.array([0.03, 0.02, 0.02, 0.02]))
 PO = (np.array([1.00, 0.93]), np.array([0.03, 0.03]))               # diafragmas III e IV
-E_al = lambda R: 7.644 * (R / 7.0) ** (2 / 3)                       # Geiger, âncora do Apêndice F
+E_al = lambda R: 7.644 * (R / 7.0) ** (2 / 3)                       # Geiger, âncora do Apêndice D
 E_RaC, E_Po = E_al(6.6), E_al(3.4)
 
 def binned(Elab, pot):

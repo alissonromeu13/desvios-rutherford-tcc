@@ -1,4 +1,4 @@
-"""Figura 9 do TCC (Seção 2.4.5) – Fatores de forma da Seção 2.4 comparados a uma densidade realista (Fermi de 2 parâmetros) com o
+"""Figura 8 do TCC (Seção 2.4.4) – Fatores de forma da Seção 2.4 comparados a uma densidade realista (Fermi de 2 parâmetros) com o
 MESMO raio quadrático médio. Ilustração para o chumbo: c = 6,62 fm, z = 0,546 fm, parâmetros 2pF do 207Pb
 (De Vries, De Jager & De Vries, 1987, Tab. I, p. 510; o 208Pb só tem análises FB/SOG). F(q) = (4 pi/q) int rho(r) r sin(qr) dr, normalizado.
 """

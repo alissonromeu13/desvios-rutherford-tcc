@@ -1,4 +1,4 @@
-"""Figura 18 do TCC (Seção 4.4.3) – Por que Rutherford funciona no ouro e quando deixa de funcionar.
+"""Figura 15 do TCC (Seção 4.4.3) – Por que Rutherford funciona no ouro e quando deixa de funcionar.
 alfa + 197Au com o mesmo potencial óptico (McFadden & Satchler, 1966; R_C = 1,3 A^{1/3} fm).
 (a) sigma/sigma_R x theta para várias energias; (b) sigma/sigma_R em theta_lab = 60°, 96° e 135° em função da energia,
 análogo às 'funções de excitação' de Farwell & Wegner (1954), com os E_1/4 medidos por eles (Tab. I, p. 1216).
@@ -55,7 +55,7 @@ Efw = np.array([E / fator_cin(t) for t, E, _ in fw]); dEfw = np.array([d / fator
 print("Farwell-Wegner E_1/4 incidente:", np.round(Efw, 2), "+-", np.round(dEfw, 2))
 a2.errorbar(Efw, [0.25, 0.25], xerr=dEfw, fmt="o", color=TINTA, mfc="white", ms=5, capsize=2, lw=0.9, zorder=6,
             label="Farwell e Wegner (1954)")
-# barreira no raio de toque (estimativa) e barreira l = 0 do próprio potencial óptico, como na Figura 17
+# barreira no raio de toque (estimativa) e barreira l = 0 do próprio potencial óptico, como na Figura 14
 Eb = 2 * Z * E2 / (1.2 * (4 ** (1 / 3) + A ** (1 / 3))) * (M_ALPHA + mT) / mT
 from scipy.optimize import minimize_scalar
 R0, Rc0 = r0 * A ** (1 / 3), rc * A ** (1 / 3)

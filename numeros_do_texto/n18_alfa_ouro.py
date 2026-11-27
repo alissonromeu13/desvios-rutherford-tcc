@@ -1,5 +1,5 @@
-"""Números da Seção 4.4.3 (alfa + 197Au, Figura 18) e do Apêndice E que não aparecem na própria figura.
-Mesmo potencial da Figura 17 (McFadden e Satchler 1966, p. 198; r_C = 1,3 fm).
+"""Números da Seção 4.4.3 (alfa + 197Au, Figura 15) e do Apêndice C que não aparecem na própria figura.
+Mesmo potencial da Figura 14 (McFadden e Satchler 1966, p. 198; r_C = 1,3 fm).
 Dados de comparação: Farwell e Wegner (1954), Tab. I, p. 1216 (E_1/4 e K medidos no detector, ângulo +-1°).
 """
 import os, sys
@@ -24,7 +24,7 @@ def razao(E, thl):
     return ratio_to_rutherford(S, eta, k, lab_to_cm_angle(np.radians(np.atleast_1d(thl)), M_ALPHA, mT))
 
 def fator_cin(thl, m=4.0026, M=196.97):
-    """E_detector/E_incidente no espalhamento elástico (Apêndice E)."""
+    """E_detector/E_incidente no espalhamento elástico (Apêndice C)."""
     t = np.radians(thl); return ((m * np.cos(t) + np.sqrt(M**2 - m**2 * np.sin(t) ** 2)) / (m + M)) ** 2
 
 if __name__ == "__main__":
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     Es = np.arange(12.0, 45.01, 0.25)
     r60 = np.array([razao(E, 60.0)[0] for E in Es])
     print(f"60°: primeira queda abaixo de 0,98 em {Es[np.argmax(r60 < 0.98)]:.1f} MeV; máximo {r60.max():.2f} em {Es[r60.argmax()]:.1f} MeV")
-    print("Fatores cinemáticos (Apêndice E): 60° ->", f"{fator_cin(60):.3f}", "; 96° ->", f"{fator_cin(96):.3f}")
+    print("Fatores cinemáticos (Apêndice C): 60° ->", f"{fator_cin(60):.3f}", "; 96° ->", f"{fator_cin(96):.3f}")
     # Farwell e Wegner (1954), Tab. I: E_1/4 (detector) e K (inclinação de ln sigma contra E)
     for thl, E14x, Kx in [(60, 33.6, 0.271), (96, 24.9, 0.394)]:
         f = fator_cin(thl)
